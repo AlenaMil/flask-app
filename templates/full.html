@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>Результаты:</p>
+    <table border="1">
+        <tr>
+            <th>Участник</th>
+            <th>Название файла</th>
+            <th>Выбранное значение</th>
+            <th>Реальное значение</th>
+            <th>Первый признак</th>
+            <th>Второй признак</th>
+            <th>Третий признак</th>
+        </tr>
+        {% for res in result %}
+            <tr>
+                <td></td>
+                <td>{{res['name']}}</td>
+                <td>{{res['art']}}</td>
+                <td>{{res['artificial']}}</td>
+                <td>{{res['mark1']}}</td>
+                <td>{{res['mark2']}}</td>
+                <td>{{res['mark3']}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

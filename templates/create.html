@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Тестирование {% endblock %}</h1>
+<h5>Искусственный - это голос, созданный методом синтеза речи </h5>
+<h5>Натуральный - это голос, принадлежащий человеку </h5>
+<h5>Вам необходимо написать три признака, по которым вы поняли, что голос искусственный/натуральный</h5>
+<form method="post">
+    <div class="form-group">
+        <label for="username">Имя</label>
+        <input type="text" name="username"
+               placeholder="Введите имя" class="form-control"
+               value="{{ request.form['username'] }}" required/></input>
+    </div>
+        <div class="form-group">
+        <label for="age">Возраст</label>
+        <input type="number" id="age" name="age" min="18" max="100" step="1" class="form-control" value="{{ request.form['age'] }}" required/></input>
+    </div>
+        <div class="form-group">
+        <label for="dep">Пол:</label>
+
+        <select id="gender" name="gender">
+            <option value="1">Женский</option>
+            <option value="2">Мужской</option>
+        </select>
+
+    </div>
+    <div class="form-group">
+        <label for="dep">Специальность:</label>
+
+        <select id="department" name="dep">
+            {% for dep in deps %}
+            <option value="{{ dep['id'] }}">{{dep['name']}}</option>
+            {% endfor %}
+        </select>
+
+    </div>
+    <div class="form-group">
+        <label for="f">Факультет:</label>
+
+        <select id="faculty" name="f">
+            {% for f in facu %}
+            <option value="{{ f['id'] }}">{{f['name']}}</option>
+            {% endfor %}
+        </select>
+
+    </div>
+        <div class="form-group">
+        <label for="course">Курс:</label>
+
+        <select id="course" name="course">
+            <option value="1">Первый</option>
+            <option value="2">Второй</option>
+            <option value="3">Третий</option>
+            <option value="4">Четверг</option>
+            <option value="5">Первый (маг)</option>
+            <option value="6">Второй (маг)</option>
+            <option value="7">Выпускник</option>
+        </select>
+
+    </div>
+    <table>
+    {% for file in files %}
+        <tr>
+            <td>
+     <audio controls>
+            <source src="{{ url_for('static', filename = file['filename']) }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+            </td>
+    <td>
+    <select id="{{file['id']}}" name="art_{{file['id']}}">
+      <option value="1">Искусственный</option>
+      <option value="2">Натуральный</option>
+    </select>
+        </td>
+    <td>
+        <input type="text" name="m1_{{file['id']}}" id="1_{{file['id']}}"
+               placeholder="Первый признак" class="form-control"
+                required/>
+        </input>
+        </td>
+    <td>
+        <input type="text" name="m2_{{file['id']}}" id="2_{{file['id']}}"
+               placeholder="Второй признак" class="form-control"
+                required/>
+        </input>
+        </td>
+    <td>
+        <input type="text" name="m3_{{file['id']}}" id="3_{{file['id']}}"
+               placeholder="Третий признак" class="form-control"
+                required/>
+        </input>
+            </td>
+    </tr>
+    {% endfor %}
+    </table>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </div>
+</form>
+{% endblock %}

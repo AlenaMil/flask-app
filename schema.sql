@@ -1,0 +1,59 @@
+DROP TABLE IF EXISTS faculty;
+
+CREATE TABLE faculty (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+DROP TABLE IF EXISTS department;
+
+CREATE TABLE department (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    facultyid INTEGER NOT NULL,
+    FOREIGN KEY(facultyid) REFERENCES faculty(id)
+);
+
+
+
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    username TEXT NOT NULL,
+    gender INTEGER NOT NULL,
+    age INTEGER NOT NULL,
+    depid INTEGER NOT NULL,
+    course INTEGER NOT NULL,
+    FOREIGN KEY(depid) REFERENCES department(id)
+);
+
+
+DROP TABLE IF EXISTS files;
+
+CREATE TABLE files (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    filename TEXT NOT NULL,
+    artificial INTEGER NOT NULL
+);
+
+
+DROP TABLE IF EXISTS results;
+
+CREATE TABLE results (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user INTEGER NOT NULL,
+    file INTEGER NOT NULL,
+    art INTEGER NOT NULL,
+    mark1 TEXT NOT NULL,
+    mark2 TEXT NOT NULL,
+    mark3 TEXT NOT NULL,
+    FOREIGN KEY(user) REFERENCES users(id),
+    FOREIGN KEY(file) REFERENCES files(id)
+);
+
+
+

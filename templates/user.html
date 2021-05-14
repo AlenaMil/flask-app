@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{% block title %} {{ user['username'] }} {% endblock %}</h2>
+    <span class="badge badge-primary">{{ user['created'] }}</span>
+    <p>Возраст: {{ user['age'] }}</p>
+    <p>Пол: {{ gender }} </p>
+    <p>Кафедра: {{ dept }} </p>
+    <p>Курс: {{ course }} </p>
+    <p>Результаты:</p>
+    <table border="1">
+        <tr>
+            <th>Название файла</th>
+            <th>Выбранное значение</th>
+            <th>Реальное значение</th>
+            <th>Первый признак</th>
+            <th>Второй признак</th>
+            <th>Третий признак</th>
+        </tr>
+        {% for res in result %}
+            <tr>
+                <td>{{res['name']}}</td>
+                <td>{{res['art']}}</td>
+                <td>{{res['artificial']}}</td>
+                <td>{{res['mark1']}}</td>
+                <td>{{res['mark2']}}</td>
+                <td>{{res['mark3']}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

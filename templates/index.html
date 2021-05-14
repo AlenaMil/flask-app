@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Добро пожаловать в тестовую систему {% endblock %}</h1>
+    {% for user in users %}
+        <a href="{{ url_for('user', user_id=user['id']) }}">
+            <h2>{{ user['username'] }}</h2>
+        </a>
+        <span class="badge badge-primary">{{ user['created'] }}</span>
+        <hr>
+        <span>Возраст: {{ user['age'] }}</span>
+        <hr>
+    {% endfor %}
+{% endblock %}
